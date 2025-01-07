@@ -1,0 +1,4 @@
+**/*target
+**/*pgbouncer
+/local_dev/settings.yml
+/local_dev/pgbouncer.out

@@ -1,0 +1,42 @@
+[package]
+name = "log-watchdog"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+codegen-units = 1 # Allows LLVM to perform better optimization
+lto = true # Enables link-time-optimizations
+opt-level = 3 # https://doc.rust-lang.org/cargo/reference/profiles.html#opt-level
+panic = "abort" # https://doc.rust-lang.org/cargo/reference/profiles.html#panic
+strip = true # Ensures debug symbols are removed
+
+[workspace]
+members = ["crates/*"]
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unexpected_cfgs = { level = "allow", check-cfg = ['cfg(disabled)'] }
+
+[workspace.lints.clippy]
+pedantic = { level = "deny", priority = -1 }
+nursery = { level = "deny", priority = -1 }
+enum_glob_use = "deny"
+must_use_candidate = "allow"
+
+[workspace.dependencies]
+thiserror = "2.0.9"
+log = "0.4.22"
+
+[dependencies]
+settings = { path = "crates/settings" }
+logging = { path = "crates/logging" }
+log = { workspace = true }
+thiserror = { workspace = true }
+clap = { version = "4.5.23", default-features = true, features = [
+    "std",
+    "derive",
+] }
+notify = { version = "7.0.0", default-features = false }
+
+[dev-dependencies]
+tempdir = "0.3.7"

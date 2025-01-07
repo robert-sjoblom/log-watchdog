@@ -1,0 +1,11 @@
+watchdogs:
+  pgbouncer:
+    log_file: /var/log/pgbouncer/pgbouncer.log
+    output_file: /var/log/pgbouncer/pgbouncer.out
+    debounce: 5000
+    oneshot: true
+    regex: .*
+    commands:
+      ls:
+        args:
+          - -a

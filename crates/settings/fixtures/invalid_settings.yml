@@ -1,0 +1,3 @@
+watchdogs:
+  pgbouncer:
+    output_file: /var/log/pgbouncer/pgbouncer.out
